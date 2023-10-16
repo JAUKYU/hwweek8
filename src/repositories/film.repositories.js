@@ -1,31 +1,17 @@
-const pool = require("../db/queries");
+const pool = require("../dbconfig/queries");
 
-function getFilms(category) {
+function getMovies() {
   return new Promise((resolve, reject) => {
-    if (!category) {
-      pool.query(`SELECT * FROM film ORDER BY film_id`, (error, result) => {
+    pool.query(`SELECT * FROM movies ORDER BY movies`, (error, result) => {
         if (error) {
           reject(error);
         }
         resolve(result);
       });
-    }
-    pool.query(
-      `SELECT * FROM film f
-            INNER JOIN film_category ON f.film_id = film_category.film_id
-            INNER JOIN category ON film_category.category_id = category.category_id
-            where category.category_id = ${category} ORDER BY film_category.film_id`,
-      (error, result) => {
-        if (error) {
-          reject(error);
-        }
-        resolve(result);
-      }
-    );
-  });
+    });
 }
 
-function getFilmById(id) {
+function getMoviesById(id) {
   return new Promise((resolve, reject) => {
     pool.query(`SELECT * FROM film WHERE film_id = ${id}`, (error, result) => {
       if (error) {
@@ -37,6 +23,6 @@ function getFilmById(id) {
 }
 
 module.exports = {
-  getFilms,
-  getFilmById,
+  getMovies,
+  getMoviesById,
 };

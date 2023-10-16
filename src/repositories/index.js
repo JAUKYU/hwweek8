@@ -1,5 +1,5 @@
 const filmRepositories = require('./film.repositories');
-const categoryRepositories = require('./category.repositories');
+const categoryRepositories = require('./user.repositories');
 
 module.exports = {
     filmRepositories,
